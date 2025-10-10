@@ -10,6 +10,7 @@ int main() {
     cout << "Bienvenido al programa de metodos de ordenamiento\n";
 
     int tam;
+    int opc;
     cout << "Dame el tamaño del arreglo\n";
     cin >> tam;
 
@@ -24,6 +25,20 @@ int main() {
     }
     cout << endl;
 
+    cout << "seleccione una opcion para ordenar la matriz generada" << endl;
+    cout << "Busqueda secuencial" <<endl;
+    cout << "Busqueda Binaria" << endl;
+
+    cin >> opc;
+
+    switch (opc) {
+        case 1:
+            cout << "hola1" << endl;
+            break;
+        case 2:
+            cout << "hola2" << endl;
+            break;
+    }
 
 
     return 0;
