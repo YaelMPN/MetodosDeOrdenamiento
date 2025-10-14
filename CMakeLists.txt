@@ -8,5 +8,4 @@ include_directories(.)
 add_executable(MetodosDeOrdenamiento
         main.cpp
         funciones.cpp
-        funciones.h
-)
+        funciones.h)
