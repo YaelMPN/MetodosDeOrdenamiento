@@ -1,16 +1,18 @@
-
-
-
-
+/*funciones.c++
+Pérez Nava Yael Mauricio
+Fecha de Compilacion: 14/10/25
+Programa: logica de las funciones llamadas en main
+*/
 #include "funciones.h"
-#include <random>
 #include <iostream>
-#include <ctime>
-#include <algorithm>
-
+#include <chrono> // Para medir el tiempo
+#include <algorithm> // Para std::swap
 
 using namespace std;
 
+
+
+// Crea una copia dinámica del arreglo original
 int* crearCopia(const int arr[], int size) {
     int* copia = new int[size];
     for (int i = 0; i < size; ++i) {
@@ -19,41 +21,74 @@ int* crearCopia(const int arr[], int size) {
     return copia;
 }
 
-
-
+// Llena el arreglo con números aleatorios del 1 al 100
 void llenar(int arr [], int tam) {
-    for (int i = 0;i < tam; ++i) {
+    for (int i = 0; i < tam; ++i) {
         arr[i] = rand() % 100 + 1;
     }
 }
-void Mostrar(const int arr [], int tam) {
 
-    cout << "El contenido del arreglo de tamano "<< tam << " es:" << endl;
+// Muestra el contenido del arreglo con un título
+void Mostrar(const int arr[], int tam, const char* titulo) {
+    cout << "--- " << titulo << " ---" << endl;
     for (int i = 0; i < tam; ++i) {
-        cout << i+1 << ".- " << arr[i] << endl;
+        cout << "[" << arr[i] << "] ";
     }
-    cout << endl;
+    cout << endl << endl;
 }
 
-void BuscarSecuencial(const int arr [], int tam, int valor) {
+
+// --- Funciones de Búsqueda ---
+
+void BuscarSecuencial(const int arr[], int tam, int valor) {
     bool encontrado = false;
     int posicion = -1;
     for (int i = 0; i < tam; ++i) {
         if (arr[i] == valor) {
             encontrado = true;
             posicion = i;
+            break; // Salimos del bucle al encontrarlo
         }
     }
     if (encontrado) {
-        cout << "El valor " << valor << " fue encontrado en la posicion " << posicion+1 << "." << endl;
+        cout << "\n>> Resultado: El valor " << valor << " fue encontrado en la posicion " << posicion << "." << endl;
     } else {
-        cout << "El valor " << valor << " no se encuentra en el arreglo." << endl;
+        cout << "\n>> Resultado: El valor " << valor << " no se encuentra en el arreglo." << endl;
     }
 }
 
-void OrdenarBurbuja(const int arr [], int tam) {
-    int* copia = crearCopia(arr, tam);
+void BuscarBinaria(const int arr[], int tam, int valor) {
+    int izquierda = 0;
+    int derecha = tam - 1;
+    bool encontrado = false;
+    int posicion = -1;
 
+    while (izquierda <= derecha) {
+        int medio = izquierda + (derecha - izquierda) / 2;
+        if (arr[medio] == valor) {
+            encontrado = true;
+            posicion = medio;
+            break;
+        }
+        if (arr[medio] < valor) {
+            izquierda = medio + 1;
+        } else {
+            derecha = medio - 1;
+        }
+    }
+
+    if (encontrado) {
+        cout << "\n>> Resultado: El valor " << valor << " fue encontrado en la posicion " << posicion << "." << endl;
+    } else {
+        cout << "\n>> Resultado: El valor " << valor << " no se encuentra en el arreglo." << endl;
+    }
+}
+
+
+// --- Funciones de Ordenamiento ---
+
+int* OrdenarBurbuja(const int arr[], int tam) {
+    int* copia = crearCopia(arr, tam);
     for (int i = 0; i < tam - 1; ++i) {
         for (int j = 0; j < tam - i - 1; ++j) {
             if (copia[j] > copia[j + 1]) {
@@ -61,12 +96,11 @@ void OrdenarBurbuja(const int arr [], int tam) {
             }
         }
     }
-    Mostrar(copia, tam);
-    delete[] copia;
+    return copia;
 }
-void OrdenarInserccion(const int arr [], int tam) {
-    int* copia = crearCopia(arr, tam);
 
+int* OrdenarInserccion(const int arr[], int tam) {
+    int* copia = crearCopia(arr, tam);
     for (int i = 1; i < tam; ++i) {
         int clave = copia[i];
         int j = i - 1;
@@ -76,13 +110,11 @@ void OrdenarInserccion(const int arr [], int tam) {
         }
         copia[j + 1] = clave;
     }
-    Mostrar(copia, tam);
-    delete[] copia;
+    return copia;
 }
 
-void OrdenarSeleccion(const int arr [], int tam) {
+int* OrdenarSeleccion(const int arr[], int tam) {
     int* copia = crearCopia(arr, tam);
-
     for (int i = 0; i < tam - 1; ++i) {
         int min_idx = i;
         for (int j = i + 1; j < tam; ++j) {
@@ -91,12 +123,10 @@ void OrdenarSeleccion(const int arr [], int tam) {
             }
         }
         if (min_idx != i) {
-            std::swap(copia[min_idx], copia[i]);
+            swap(copia[min_idx], copia[i]);
         }
     }
-    Mostrar(copia, tam);
-    delete[] copia;
-
+    return copia;
 }
 
 
