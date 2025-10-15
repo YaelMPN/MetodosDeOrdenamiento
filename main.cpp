@@ -20,7 +20,7 @@ void pausar() {
 }
 int main() {
     srand(time(NULL)); // Inicializar semilla para números aleatorios
-    cout << "Pérez Nava Yael Mauricio 3NM30" <<endl;
+    cout << "Perez Nava Yael Mauricio 3NM30" <<endl;
     cout << "Bienvenido al programa de metodos de ordenamiento y busqueda\n";
     int tam;
     cout << "Dame el tamano del arreglo: ";
@@ -41,7 +41,7 @@ int main() {
         cout << "--- MENU PRINCIPAL ---" << endl;
         cout << "1. Busqueda Secuencial" << endl;
         cout << "2. Ordenar con Burbuja" << endl;
-        cout << "3. Ordenar con Inserccion" << endl;
+        cout << "3. Ordenar con Insercion" << endl;
         cout << "4. Ordenar con Seleccion" << endl;
         cout << "5. Salir" << endl;
         cout << "Seleccione una opcion: ";
