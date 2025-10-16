@@ -87,11 +87,15 @@ void BuscarBinaria(const int arr[], int tam, int valor) {
 
 // --- Funciones de Ordenamiento ---
 
-int* OrdenarBurbuja(const int arr[], int tam) {
+int* OrdenarBurbuja(const int arr[], int tam, long long &comparaciones, long long &intercambios) {
     int* copia = crearCopia(arr, tam);
     for (int i = 0; i < tam - 1; ++i) {
         for (int j = 0; j < tam - i - 1; ++j) {
+            // CADA VEZ que se ejecuta el if, es una comparación.
+            comparaciones++;
             if (copia[j] > copia[j + 1]) {
+                // Si entramos aquí, hacemos un intercambio.
+                intercambios++;
                 swap(copia[j], copia[j + 1]);
             }
         }
@@ -99,30 +103,46 @@ int* OrdenarBurbuja(const int arr[], int tam) {
     return copia;
 }
 
-int* OrdenarInserccion(const int arr[], int tam) {
+int* OrdenarInserccion(const int arr[], int tam, long long &comparaciones, long long &movimientos) {
     int* copia = crearCopia(arr, tam);
     for (int i = 1; i < tam; ++i) {
         int clave = copia[i];
         int j = i - 1;
-        while (j >= 0 && copia[j] > clave) {
-            copia[j + 1] = copia[j];
-            j = j - 1;
+
+        // El while realiza comparaciones para encontrar la posición correcta.
+        while (j >= 0) {
+            comparaciones++;
+            if (copia[j] > clave) {
+                // Esto no es un intercambio, es un "movimiento" o "desplazamiento".
+                movimientos++;
+                copia[j + 1] = copia[j];
+                j = j - 1;
+            } else {
+                // Si no es mayor, ya no necesitamos seguir comparando en este ciclo.
+                break;
+            }
         }
         copia[j + 1] = clave;
+        // La inserción final también puede considerarse un movimiento.
+        movimientos++;
     }
     return copia;
 }
 
-int* OrdenarSeleccion(const int arr[], int tam) {
+int* OrdenarSeleccion(const int arr[], int tam, long long &comparaciones, long long &intercambios) {
     int* copia = crearCopia(arr, tam);
     for (int i = 0; i < tam - 1; ++i) {
         int min_idx = i;
         for (int j = i + 1; j < tam; ++j) {
+            // Cada vez que buscamos el mínimo, hacemos una comparación.
+            comparaciones++;
             if (copia[j] < copia[min_idx]) {
                 min_idx = j;
             }
         }
+        // El intercambio solo se hace UNA VEZ por cada ciclo principal.
         if (min_idx != i) {
+            intercambios++;
             swap(copia[min_idx], copia[i]);
         }
     }

@@ -86,18 +86,22 @@ int main() {
             case 3: // Ordenamiento Inserción
             case 4: { // Ordenamiento Selección
                 system("cls");
-
+                long long comparaciones = 0;
+                long long intercambios_o_movs = 0;
                 auto start = chrono::high_resolution_clock::now(); // Iniciar cronómetro
                 //aqui se llaman al resto de funciones de ordenamiento segun sea el caso
                 const char* metodoNombre;
+                const char* tipoAccion = "Intercambios";
+
                 if (opcPrincipal == 2) {
-                    arregloOrdenado = OrdenarBurbuja(arregloOriginal, tam);
+                    arregloOrdenado = OrdenarBurbuja(arregloOriginal, tam, comparaciones, intercambios_o_movs);
                     metodoNombre = "Burbuja";
                 } else if (opcPrincipal == 3) {
-                    arregloOrdenado = OrdenarInserccion(arregloOriginal, tam);
+                    tipoAccion = "Movimientos"; // Cambiamos el nombre para Inserción
+                    arregloOrdenado = OrdenarInserccion(arregloOriginal, tam, comparaciones, intercambios_o_movs);
                     metodoNombre = "Insercion";
                 } else { // opcPrincipal == 4
-                    arregloOrdenado = OrdenarSeleccion(arregloOriginal, tam);
+                    arregloOrdenado = OrdenarSeleccion(arregloOriginal, tam, comparaciones, intercambios_o_movs);
                     metodoNombre = "Seleccion";
                 }
 
@@ -114,7 +118,8 @@ int main() {
 
 
                 cout << ">> Tiempo de ejecucion del metodo " << metodoNombre << ": " << duration.count() << " ms" << endl;//se imprime cuanto tardo cualquiera de los 3 metodos
-
+                cout << ">> Comparaciones realizadas: " << comparaciones << endl;
+                cout << ">> " << tipoAccion << " realizados: " << intercambios_o_movs << endl;
                 int opcSub;
                 do {
                     cout << "\n--- MENU DE ORDENAMIENTO ---" << endl;

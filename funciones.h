@@ -17,8 +17,8 @@ void BuscarSecuencial(const int arr[], int tam, int valor);
 void BuscarBinaria(const int arr[], int tam, int valor);
 
 // Funciones de Ordenamiento (Ahora devuelven el arreglo ordenado)
-int* OrdenarBurbuja(const int arr[], int tam);
-int* OrdenarSeleccion(const int arr[], int tam);
-int* OrdenarInserccion(const int arr[], int tam);
+int* OrdenarBurbuja(const int arr[], int tam, long long &comparaciones, long long &intercambios);
+int* OrdenarSeleccion(const int arr[], int tam, long long &comparaciones, long long &intercambios);
+int* OrdenarInserccion(const int arr[], int tam, long long &comparaciones, long long &movimientos);
 
 #endif //METODOSDEORDENAMIENTO_FUNCIONES_H
